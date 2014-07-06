@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/paypal/get-balance', 'PayPalController@getBalance');
-
 Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get('/login', function()
+{
+    return View::make('login');
+});
+
+Route::get('/paypal/get-balance', 'PayPalController@getBalance');
