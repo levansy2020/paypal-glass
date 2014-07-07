@@ -14,9 +14,7 @@ class PageController extends \BaseController {
     }
 
     /**
-	 * Display Overview page.
-	 *
-	 * @return Response
+	 * Home Page
 	 */
 	public function index()
 	{
@@ -33,6 +31,5 @@ class PageController extends \BaseController {
         $data = array('current_balance' => $current_balance, 'recent_history' => $recent_history);
         return View::make('index')->with('data', $data);
 	}
-
 
 }
