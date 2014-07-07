@@ -34,6 +34,13 @@
         <tbody>
         @foreach ($data['recent_history'] as $transaction)
         <?php
+        /**
+         * @todo
+         * I put this here for now so I could quickly
+         * calculate the amounts, but this should probably
+         * be moved into the model and passed along so it's
+         * available here.
+         */
         $net_amount = number_format($transaction['L_NETAMT'],2);
         $fee_amount = str_replace('-','',$transaction['L_FEEAMT']);
         $fee_amount = number_format($fee_amount,2);
