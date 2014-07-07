@@ -25,9 +25,7 @@ class PayPal {
     }
 
     /**
-     * @return mixed
-     *
-     * Call PayPal's GetBalance API and pass the result to a balance view.
+     * GetBalance
      */
     public function getBalance()
     {
@@ -47,7 +45,34 @@ class PayPal {
     }
 
     /**
-     * Call PayPal's TransactionSearch API for recent history.
+     * GetTransactionDetails
+     */
+    public function getTransactionDetails($transaction_id)
+    {
+        // Prepare request arrays
+        $GTDFields = array(
+            'transactionid' => $transaction_id							// PayPal transaction ID of the order you want to get details for.
+        );
+
+        $PayPalRequestData = array('GTDFields'=>$GTDFields);
+
+        // Pass data into class for processing with PayPal and load the response array into $PayPalResult
+        $PayPalResult = $PayPal->GetTransactionDetails($PayPalRequestData);
+
+        if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
+        {
+            // Success
+            return $PayPalResult;
+        }
+        else
+        {
+            // Failure
+
+        }
+    }
+
+    /**
+     * TransactionSearch
      */
     public function transactionSearch($params)
     {
