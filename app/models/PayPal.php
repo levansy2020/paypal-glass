@@ -67,7 +67,7 @@ class PayPal {
         else
         {
             // Failure
-
+            return 'No details available for ' . $transaction_id;
         }
     }
 
@@ -140,7 +140,7 @@ class PayPal {
         else
         {
             // Failure
-            return 'Not available.';
+            return 'No results.';
         }
     }
 }
