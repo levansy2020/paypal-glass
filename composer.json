@@ -7,6 +7,9 @@
 		"laravel/framework": "4.2.*", 
 		"angelleye/paypal-php-library": "v2.0.1"
 	},
+    "require-dev": {
+       "way/generators": "2.*"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",
