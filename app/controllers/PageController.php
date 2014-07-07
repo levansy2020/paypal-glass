@@ -12,7 +12,12 @@ class PageController extends \BaseController {
         $paypal = new PayPal();
         $current_balance = $paypal->getBalance();
 
-        $data = array('current_balance' => $current_balance);
+        $params = array(
+            'number_of_days' => 1
+        );
+        $recent_history = $paypal->transactionSearch($params);
+
+        $data = array('current_balance' => $current_balance, 'recent_history' => $recent_history);
         return View::make('index')->with('data', $data);
 	}
 
