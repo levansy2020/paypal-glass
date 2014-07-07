@@ -22,6 +22,7 @@
         <thead>
         <tr>
             <th>Date</th>
+            <th>Transaction ID</th>
             <th>Type</th>
             <th>Name / Email</th>
             <th>Payment Status</th>
@@ -40,6 +41,7 @@
         ?>
         <tr class="odd gradeX">
             <td class="center">{{ $transaction['L_TIMESTAMP'] }}</td>
+            <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{ $transaction['L_TRANSACTIONID'] }}</a></td>
             <td class="center">{{ $transaction['L_TYPE'] }}</td>
             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
             <td class="center">{{ $transaction['L_STATUS'] }}</td>
