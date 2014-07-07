@@ -52,33 +52,50 @@ class PayPal {
     public function transactionSearch($params)
     {
         // Prepare request arrays
-        $number_of_days = $params['number_of_days'];
-
+        $number_of_days = isset($params['number_of_days']) ? $params['number_of_days'] : 1;
         $start_date = gmdate("Y-m-d\\TH:i:sZ",strtotime('now - ' . $number_of_days . ' days'));
+        $end_date = isset($params['end_date']) ? $params['end_date'] : '';
+        $email = isset($params['email']) ? $params['email'] : '';
+        $receiver = isset($params['receiver']) ? $params['receiver'] : '';
+        $receipt_id = isset($params['receipt_id']) ? $params['receipt_id'] : '';
+        $transaction_id = isset($params['transaction_id']) ? $params['transaction_id'] : '';
+        $invoice_number = isset($params['invoice_number']) ? $params['invoice_number'] : '';
+        $cc_number = isset($params['cc_number']) ? $params['cc_number'] : '';
+        $auction_item_number = isset($params['auction_item_number']) ? $params['auction_item_number'] : '';
+        $transaction_class = isset($params['transaction_class']) ? $params['transaction_class'] : '';
+        $amount = isset($params['amount']) ? $params['amount'] : '';
+        $currency_code = isset($params['currency_code']) ? $params['currency_code'] : '';
+        $status = isset($params['status']) ? $params['status'] : '';
+        $profile_id = isset($params['profile_id']) ? $params['profile_id'] : '';
+        $salutation = isset($params['salutation']) ? $params['salutation'] : '';
+        $first_name = isset($params['first_name']) ? $params['first_name'] : '';
+        $middle_name = isset($params['middle_name']) ? $params['middle_name'] : '';
+        $last_name = isset($params['last_name']) ? $params['last_name'] : '';
+        $suffix = isset($params['suffix']) ? $params['suffix'] : '';
 
         $TSFields = array(
             'startdate' => $start_date, 							// Required.  The earliest transaction date you want returned.  Must be in UTC/GMT format.  2008-08-30T05:00:00.00Z
-            'enddate' => '', 							// The latest transaction date you want to be included.
-            'email' => '', 								// Search by the buyer's email address.
-            'receiver' => '', 							// Search by the receiver's email address.
-            'receiptid' => '', 							// Search by the PayPal account optional receipt ID.
-            'transactionid' => '', 						// Search by the PayPal transaction ID.
-            'invnum' => '', 							// Search by your custom invoice or tracking number.
-            'acct' => '', 								// Search by a credit card number, as set by you in your original transaction.
-            'auctionitemnumber' => '', 					// Search by auction item number.
-            'transactionclass' => '', 					// Search by classification of transaction.  Possible values are: All, Sent, Received, MassPay, MoneyRequest, FundsAdded, FundsWithdrawn, Referral, Fee, Subscription, Dividend, Billpay, Refund, CurrencyConversions, BalanceTransfer, Reversal, Shipping, BalanceAffecting, ECheck
-            'amt' => '', 								// Search by transaction amount.
-            'currencycode' => '', 						// Search by currency code.
-            'status' => '',  							// Search by transaction status.  Possible values: Pending, Processing, Success, Denied, Reversed
-            'profileid' => ''							// Recurring Payments profile ID.  Currently undocumented but has tested to work.
+            'enddate' => $end_date, 							// The latest transaction date you want to be included.
+            'email' => $email, 								// Search by the buyer's email address.
+            'receiver' => $receiver, 							// Search by the receiver's email address.
+            'receiptid' => $receipt_id, 							// Search by the PayPal account optional receipt ID.
+            'transactionid' => $transaction_id, 						// Search by the PayPal transaction ID.
+            'invnum' => $invoice_number, 							// Search by your custom invoice or tracking number.
+            'acct' => $cc_number, 								// Search by a credit card number, as set by you in your original transaction.
+            'auctionitemnumber' => $auction_item_number, 					// Search by auction item number.
+            'transactionclass' => $transaction_class, 					// Search by classification of transaction.  Possible values are: All, Sent, Received, MassPay, MoneyRequest, FundsAdded, FundsWithdrawn, Referral, Fee, Subscription, Dividend, Billpay, Refund, CurrencyConversions, BalanceTransfer, Reversal, Shipping, BalanceAffecting, ECheck
+            'amt' => $amount, 								// Search by transaction amount.
+            'currencycode' => $currency_code, 						// Search by currency code.
+            'status' => $status,  							// Search by transaction status.  Possible values: Pending, Processing, Success, Denied, Reversed
+            'profileid' => $profile_id							// Recurring Payments profile ID.  Currently undocumented but has tested to work.
         );
 
         $PayerName = array(
-            'salutation' => '', 						// Search by payer's salutation.
-            'firstname' => '', 							// Search by payer's first name.
-            'middlename' => '', 						// Search by payer's middle name.
-            'lastname' => '', 							// Search by payer's last name.
-            'suffix' => ''	 							// Search by payer's suffix.
+            'salutation' => $salutation, 						// Search by payer's salutation.
+            'firstname' => $first_name, 							// Search by payer's first name.
+            'middlename' => $middle_name, 						// Search by payer's middle name.
+            'lastname' => $last_name, 							// Search by payer's last name.
+            'suffix' => $suffix	 							// Search by payer's suffix.
         );
 
         $PayPalRequestData = array(
