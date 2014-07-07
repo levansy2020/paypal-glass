@@ -1,18 +1,9 @@
 <?php
 
-use angelleye\PayPal;
-
-class PayPalController extends BaseController {
-
-	/*
-	|--------------------------------------------------------------------------
-	| PayPal Controller
-	|--------------------------------------------------------------------------
-	|
-	| Here we'll make all the calls to PayPal API's.
-	|
-	|
-	*/
+/**
+ * Class PayPal
+ */
+class PayPal {
 
     /**
      * @return array
@@ -35,15 +26,15 @@ class PayPalController extends BaseController {
      * Call PayPal's GetBalance API and pass the result to a balance view.
      */
     public function getBalance()
-	{
-        $PayPal = new PayPal\PayPal($this->getPayPalConfig());
+    {
+        $PayPal = new \angelleye\PayPal\PayPal($this->getPayPalConfig());
         $GBFields = array('returnallcurrencies' => true);
         $PayPalRequestData = array('GBFields'=>$GBFields);
         $PayPalResult = $PayPal->GetBalance($PayPalRequestData);
 
         $Balance = number_format($PayPalResult['BALANCERESULTS'][0]['L_AMT'],2);
 
-        return View::make('paypal/get-balance')->with('balance', $Balance);
-	}
+        return $Balance;
 
+    }
 }

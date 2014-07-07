@@ -9,7 +9,11 @@ class PageController extends \BaseController {
 	 */
 	public function index()
 	{
-        return View::make('index');
+        $paypal = new PayPal();
+        $current_balance = $paypal->getBalance();
+
+        $data = array('current_balance' => $current_balance);
+        return View::make('index')->with('data', $data);
 	}
 
 
