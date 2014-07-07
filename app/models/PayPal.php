@@ -59,6 +59,17 @@ class PayPal {
         // Pass data into class for processing with PayPal and load the response array into $PayPalResult
         $PayPalResult = $this->PayPal->GetTransactionDetails($PayPalRequestData);
 
+        // Add subtotal and net total to results.
+        $subtotal = isset($PayPalResult['AMT']) ? $PayPalResult['AMT'] : 0;
+        $subtotal = isset($PayPalResult['TAXAMT']) ? $subtotal - $PayPalResult['TAXAMT'] : $subtotal;
+        $subtotal = isset($PayPalResult['SHIPPINGAMT']) ? $subtotal - $PayPalResult['SHIPPINGAMT'] : $subtotal;
+        $subtotal = isset($PayPalResult['HANDLINGAMT']) ? $subtotal - $PayPalResult['HANDLINGAMT'] : $subtotal;
+        $PayPalResult['SUBTOTAL'] = $subtotal;
+
+        $nettotal = isset($PayPalResult['AMT']) ? $PayPalResult['AMT'] : 0;
+        $nettotal = isset($PayPalResult['FEEAMT']) ? $nettotal - $PayPalResult['FEEAMT'] : $nettotal;
+        $PayPalResult['NETAMT'] = $nettotal;
+
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
             // Success
@@ -67,7 +78,8 @@ class PayPal {
         else
         {
             // Failure
-            return 'No details available for ' . $transaction_id;
+            $errors = $PayPalResult['ERRORS'];
+            return $errors;
         }
     }
 
