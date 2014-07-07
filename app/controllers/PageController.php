@@ -32,4 +32,14 @@ class PageController extends \BaseController {
         return View::make('index')->with('data', $data);
 	}
 
+    /**
+     * Transaction Details
+     */
+    public function getTransactionDetails($transaction_id)
+    {
+        // GetTransactionDetails
+        $transaction_details = $this->PayPal->getTransactionDetails($transaction_id);
+        return View::make('get-transaction-details')->with('transaction_details', $transaction_details);
+    }
+
 }

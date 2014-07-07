@@ -18,4 +18,4 @@ Route::get('/login', function()
     return View::make('login');
 });
 
-Route::get('/paypal/get-balance', 'PayPalController@getBalance');
+Route::get('/transaction/{transaction_id}', 'PageController@getTransactionDetails');

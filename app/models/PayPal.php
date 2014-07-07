@@ -57,7 +57,7 @@ class PayPal {
         $PayPalRequestData = array('GTDFields'=>$GTDFields);
 
         // Pass data into class for processing with PayPal and load the response array into $PayPalResult
-        $PayPalResult = $PayPal->GetTransactionDetails($PayPalRequestData);
+        $PayPalResult = $this->PayPal->GetTransactionDetails($PayPalRequestData);
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
