@@ -63,7 +63,11 @@
                         ?>
                         <tr class="odd gradeX">
                             <td class="center">{{ $transaction['L_TIMESTAMP'] }}</td>
+                            @if (strtoupper($transaction['L_TYPE']) != 'TEMPORARY HOLD')
                             <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{ $transaction['L_TRANSACTIONID'] }}</a></td>
+                            @else
+                            <td class="center">{{ $transaction['L_TRANSACTIONID'] }}</td>
+                            @endif
                             <td class="center">{{ $transaction['L_TYPE'] }}</td>
                             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
                             <td class="center">{{ $transaction['L_STATUS'] }}</td>
