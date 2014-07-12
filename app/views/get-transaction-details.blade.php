@@ -169,7 +169,7 @@
                             <td>{{ $order_item['L_NUMBER'] }}</td>
                             <td>{{ $order_item['L_NAME'] }}</td>
                             <td>{{ $order_item['L_QTY'] }}</td>
-                            @if ($order_item['L_AMT']) > 0)
+                            @if ($order_item['L_AMT'] > 0)
                             <td>{{ number_format($order_item['L_AMT'],2) }}</td>
                             @else
                             <td>&nbsp;</td>
