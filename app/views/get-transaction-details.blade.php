@@ -16,67 +16,71 @@
             <div class="panel-body">
 
                 @if (isset($transaction_details['ORDERTIME']))
-                Date: {{ $transaction_details['ORDERTIME'] }} <br /><br />
+                    Date: {{ $transaction_details['ORDERTIME'] }} <br /><br />
                 @endif
 
                 @if (isset($transaction_details['FIRSTNAME']))
-                Name: {{ $transaction_details['FIRSTNAME'] }} {{ $transaction_details['LASTNAME'] }}<br />
+                    Name: {{ $transaction_details['FIRSTNAME'] }}
+
+                    @if (isset($transaction_details['LASTNAME']))
+                        {{ $transaction_details['LASTNAME'] }}<br />
+                    @endif
                 @endif
 
                 @if (isset($transaction_details['EMAIL']))
-                Email: <a target="_blank" href="mailto:{{ $transaction_details['EMAIL'] }}">{{ $transaction_details['EMAIL'] }}</a> <br/>
+                    Email: <a target="_blank" href="mailto:{{ $transaction_details['EMAIL'] }}">{{ $transaction_details['EMAIL'] }}</a> <br/>
                 @endif
 
                 @if (isset($transaction_details['PAYERSTATUS']))
-                Payer Status: {{ ucfirst($transaction_details['PAYERSTATUS']) }} <br />
+                    Payer Status: {{ ucfirst($transaction_details['PAYERSTATUS']) }} <br />
                 @endif
 
                 <br />
 
                 @if (isset($transaction_details['TRANSACTIONID']))
-                Transaction ID: {{ $transaction_details['TRANSACTIONID'] }}<br />
+                    Transaction ID: {{ $transaction_details['TRANSACTIONID'] }}<br />
                 @endif
 
                 @if (isset($transaction_details['PARENTTRANSACTIONID']))
-                {{ $transaction_details['PARENTTRANSACTIONID'] }}<br />
+                    {{ $transaction_details['PARENTTRANSACTIONID'] }}<br />
                 @endif
 
                 @if (isset($transaction_details['INVNUM']))
-                {{ $transaction_details['INVNUM'] }} <br />
+                    {{ $transaction_details['INVNUM'] }} <br />
                 @endif
 
                 @if (isset($transaction_details['TRANSACTIONTYPE']))
-                Transaction Type: {{ ucfirst($transaction_details['TRANSACTIONTYPE']) }}
+                    Transaction Type: {{ ucfirst($transaction_details['TRANSACTIONTYPE']) }}
                 @endif
 
                 @if (isset($transaction_details['PAYMENTTYPE']))
-                ({{ $transaction_details['PAYMENTTYPE'] }})
+                    ({{ $transaction_details['PAYMENTTYPE'] }})
                 @endif
 
                 <br />
 
                 @if (isset($transaction_details['PAYMENTSTATUS']))
-                Payment Status: {{ $transaction_details['PAYMENTSTATUS'] }}
+                    Payment Status: {{ $transaction_details['PAYMENTSTATUS'] }}
                 @endif
 
                 @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING')
-                ({{ $transaction_details['PENDINGREASON'] }} / {{ $transaction_details['REASONCODE'] }})
+                    ({{ $transaction_details['PENDINGREASON'] }} / {{ $transaction_details['REASONCODE'] }})
                 @endif
 
                 <br />
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITY']))
-                Seller Protection: {{ $transaction_details['PROTECTIONELIGIBILITY'] }}
+                    Seller Protection: {{ $transaction_details['PROTECTIONELIGIBILITY'] }}
                 @endif
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITYTYPE']) && strtoupper($transaction_details['PROTECTIONELIGIBILITYTYPE']) != 'NONE')
-                ({{ $transaction_details['PROTECTIONELIGIBILITYTYPE'] }})
+                    ({{ $transaction_details['PROTECTIONELIGIBILITYTYPE'] }})
                 @endif
 
                 <br /><br />
 
                 @if (isset($transaction_details['RECEIVEREMAIL']))
-                Sent to: {{ $transaction_details['RECEIVEREMAIL'] }} <br />
+                    Sent to: {{ $transaction_details['RECEIVEREMAIL'] }} <br />
                 @endif
             </div>
         </div>
@@ -153,7 +157,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Actions</div>
             <div class="panel-body">
-                @if (strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED')
+                @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED')
                 <button type="button" class="btn btn-default">Refund</button>
                 @else
                 <button type="button" class="btn btn-default disabled">Refund</button>
