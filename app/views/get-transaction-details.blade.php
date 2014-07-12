@@ -145,6 +145,14 @@
         </div>
     </div>
     @endif
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Shipping Address ({{ $transaction_details['ADDRESSSTATUS'] }})</div>
+            <div class="panel-body">
+                &nbsp;
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row">
     @if (isset($transaction_details['ORDERITEMS']) && count($transaction_details['ORDERITEMS']) > 0)
