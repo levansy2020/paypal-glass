@@ -85,4 +85,10 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <?php
+    echo '<pre />';
+    print_r($data['recent_history']);
+    ?>
+</div>
 @stop
