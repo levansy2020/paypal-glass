@@ -108,7 +108,7 @@
                         @if (isset($transaction_details['HANDLINGAMT']))
                         <tr>
                             <td>Handling:</td>
-                            <td>@if (isset($transaction_details['HANDLINGAMT'])) {{ number_format($transaction_details['HANDLINGAMT']) }} @endif</td>
+                            <td>@if (isset($transaction_details['HANDLINGAMT'])) {{ number_format($transaction_details['HANDLINGAMT'],2) }} @endif</td>
                         </tr>
                         @endif
 
