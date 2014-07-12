@@ -17,10 +17,10 @@ class PayPal {
     private function getPayPalConfig()
     {
         return array(
-            'Sandbox' => $_ENV['SANDBOX'],
-            'APIUsername' => $_ENV['PAYPAL_API_USERNAME'],
-            'APIPassword' => $_ENV['PAYPAL_API_PASSWORD'],
-            'APISignature' => $_ENV['PAYPAL_API_SIGNATURE']
+            'Sandbox' => Config::get('paypal.SANDBOX'),
+            'APIUsername' => Config::get('paypal.API_USERNAME'),
+            'APIPassword' => Config::get('paypal.API_PASSWORD'),
+            'APISignature' => Config::get('paypal.API_SIGNATURE')
         );
     }
 
