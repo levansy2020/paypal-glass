@@ -64,7 +64,13 @@
                 @endif
 
                 @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING')
-                    ({{ $transaction_details['PENDINGREASON'] }} / {{ $transaction_details['REASONCODE'] }})
+                    ({{ ucwords($transaction_details['PENDINGREASON']) }}
+
+                    @if (strtoupper($transaction_details['REASONCODE']) != 'NONE'))
+                        / {{ $transaction_details['REASONCODE'] }})
+                    @else
+                        )
+                    @endif
                 @endif
 
                 <br />
@@ -158,9 +164,13 @@
             <div class="panel-heading">Actions</div>
             <div class="panel-body">
                 @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED')
-                <button type="button" class="btn btn-default">Refund</button>
-                @else
-                <button type="button" class="btn btn-default disabled">Refund</button>
+                    <button type="button" class="btn btn-default">Refund</button>
+                @endif
+
+                @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING'
+                && strtoupper($transaction_details['PENDINGREASON']) == 'AUTHORIZATION')
+                    <button type="button" class="btn btn-default">Capture</button>
+                    <button type="button" class="btn btn-default">Void</button>
                 @endif
             </div>
         </div>
