@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('page_level_css')
+<link href="/css/plugins/social-buttons/social-buttons.css" rel="stylesheet">
+@stop
+
 @section('page_title') Transaction Details @stop
 
 @section('page_name') Transaction Details @stop
@@ -147,9 +151,13 @@
     @endif
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Shipping Address ({{ $transaction_details['ADDRESSSTATUS'] }})</div>
+            <div class="panel-heading">Actions</div>
             <div class="panel-body">
-                &nbsp;
+                @if (strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED')
+                <button type="button" class="btn btn-default">Refund</button>
+                @else
+                <button type="button" class="btn btn-default disabled">Refund</button>
+                @endif
             </div>
         </div>
     </div>
