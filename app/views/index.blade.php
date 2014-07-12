@@ -25,10 +25,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Recent History
+                Recent Transactions (Last 24 Hours)
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
