@@ -61,7 +61,7 @@
                             $net_amount = number_format($transaction['L_NETAMT'],2);
                             $fee_amount = str_replace('-','',$transaction['L_FEEAMT']);
                             $fee_amount = '-'.number_format($fee_amount,2);
-                            $gross_amount = number_format($net_amount + $fee_amount,2);
+                            $gross_amount = number_format($transaction['L_AMT'],2);
                         }
                         else
                         {
