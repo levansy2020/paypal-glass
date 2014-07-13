@@ -163,11 +163,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">Actions</div>
             <div class="panel-body">
-                @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED')
+                @if (isset($transaction_details['PAYMENTSTATUS'])
+                && strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED'
+                && strtoupper($transaction_details['TRANSACTIONTYPE']) != 'SENDMONEY')
                     <button type="button" class="btn btn-default">Refund</button>
                 @endif
 
-                @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING'
+                @if (isset($transaction_details['PAYMENTSTATUS'])
+                && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING'
                 && strtoupper($transaction_details['PENDINGREASON']) == 'AUTHORIZATION')
                     <button type="button" class="btn btn-default">Capture</button>
                     <button type="button" class="btn btn-default">Void</button>
