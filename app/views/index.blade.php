@@ -56,10 +56,19 @@
                          * be moved into the model and passed along so it's
                          * available here.
                          */
-                        $net_amount = number_format($transaction['L_NETAMT'],2);
-                        $fee_amount = str_replace('-','',$transaction['L_FEEAMT']);
-                        $fee_amount = number_format($fee_amount,2);
-                        $gross_amount = number_format($net_amount + $fee_amount,2);
+                        if(strtoupper($transaction['L_TYPE']) != 'REFUND')
+                        {
+                            $net_amount = number_format($transaction['L_NETAMT'],2);
+                            $fee_amount = str_replace('-','',$transaction['L_FEEAMT']);
+                            $fee_amount = '-'.number_format($fee_amount,2);
+                            $gross_amount = number_format($net_amount + $fee_amount,2);
+                        }
+                        else
+                        {
+                            $net_amount = number_format($transaction['L_NETAMT'],2);
+                            $fee_amount = number_format($transaction['L_FEEAMT'],2);
+                            $gross_amount = number_format($net_amount - $fee_amount,2);
+                        }
                         ?>
                         <tr class="odd gradeX">
                             <td class="center">{{ $transaction['L_TIMESTAMP'] }}</td>
@@ -74,7 +83,7 @@
                             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
                             <td class="center">{{ $transaction['L_STATUS'] }}</td>
                             <td class="center">{{ $gross_amount }}</td>
-                            <td class="center">-{{ $fee_amount }}</td>
+                            <td class="center">{{ $fee_amount }}</td>
                             <td class="center">{{ $net_amount }}</td>
                         </tr>
                         @endforeach
