@@ -64,7 +64,8 @@
                         <tr class="odd gradeX">
                             <td class="center">{{ $transaction['L_TIMESTAMP'] }}</td>
                             @if (strtoupper($transaction['L_TYPE']) != 'TEMPORARY HOLD'
-                            && strtoupper($transaction['L_TYPE']) != 'MASS PAYMENT SENT')
+                            && strtoupper($transaction['L_TYPE']) != 'MASS PAYMENT SENT'
+                            && strtoupper($transaction['L_TYPE']) != 'FEE REVERSAL')
                             <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{ $transaction['L_TRANSACTIONID'] }}</a></td>
                             @else
                             <td class="center">{{ $transaction['L_TRANSACTIONID'] }}</td>
