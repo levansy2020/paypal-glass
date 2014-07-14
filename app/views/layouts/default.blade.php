@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('page_title')</title>
+    <title>@yield('page_title') | PayPal Glass</title>
 
     <!-- Core CSS - Include with every page -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -71,10 +71,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="/"><i class="fa fa-dashboard fa-fw"></i> {{ Lang::get('menus.overview') }}</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> History</a>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{ Lang::get('menus.history') }}</a>
             </li>
         </ul>
         <!-- /#side-menu -->

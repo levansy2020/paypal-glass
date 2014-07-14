@@ -1,13 +1,13 @@
 @extends('layouts.default')
 
-@section('page_title') PayPal Glass @stop
-@section('page_name') Overview @stop
+@section('page_title') {{ Lang::get('page-names.overview') }} @stop
+@section('page_name') {{ Lang::get('page-names.overview') }} @stop
 
 @section('content')
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Current Balance</div>
+            <div class="panel-heading">{{ Lang::get('panel-headers.current-balance') }}</div>
             <div class="panel-body">{{ $data['current_balance'] }}</div>
         </div>
     </div>
@@ -28,7 +28,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Recent Transactions (Last 24 Hours)
+                {{ Lang::get('panel-headers.recent-transactions') }}
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
