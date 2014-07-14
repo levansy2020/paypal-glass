@@ -71,7 +71,7 @@
                         }
                         ?>
                         <tr class="odd gradeX">
-                            <td class="center">{{ $transaction['L_TIMESTAMP'] }}</td>
+                            <td class="center">{{ date('m-d-Y',strtotime($transaction['L_TIMESTAMP'])) }}</td>
                             @if (strtoupper($transaction['L_TYPE']) != 'TEMPORARY HOLD'
                             && strtoupper($transaction['L_TYPE']) != 'MASS PAYMENT SENT'
                             && strtoupper($transaction['L_TYPE']) != 'FEE REVERSAL')
