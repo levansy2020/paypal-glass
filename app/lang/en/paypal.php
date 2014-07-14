@@ -22,4 +22,6 @@ return array(
     "instant" => "Instant",
 
     "cart" => "Cart",
+
+    "recurring_payment" => "Recurring Payment",
 );
