@@ -12,9 +12,8 @@ class Format {
     /**
      * getCurrencyFormat()
      *
-     * Returns the amount with localized formatting for currency.
-     *
-     * @param $amount
+     * @param string $amount
+     * @param bool $symbol
      * @return string
      */
     public static function getCurrencyFormat($amount = '', $symbol = true)
