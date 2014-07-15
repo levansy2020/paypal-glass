@@ -24,4 +24,6 @@ return array(
     "cart" => "Cart",
 
     "recurring_payment" => "Recurring Payment",
+
+    "sendmoney" => "Send Money",
 );
