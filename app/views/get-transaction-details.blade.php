@@ -102,42 +102,42 @@
                         @if (isset($transaction_details['SUBTOTAL']))
                         <tr>
                             <td>{{ Lang::get('labels.subtotal') }}</td>
-                            <td>{{ number_format($transaction_details['SUBTOTAL'],2) }}</td>
+                            <td>{{ Format::getCurrencyFormat($transaction_details['SUBTOTAL']) }}</td>
                         </tr>
                         @endif
 
                         @if (isset($transaction_details['TAXAMT']))
                         <tr>
                             <td>{{ Lang::get('labels.sales-tax') }}</td>
-                            <td>@if (isset($transaction_details['TAXAMT'])) {{ number_format($transaction_details['TAXAMT'],2) }} @endif</td>
+                            <td>{{ Format::getCurrencyFormat($transaction_details['TAXAMT']) }}</td>
                         </tr>
                         @endif
 
                         @if (isset($transaction_details['SHIPPINGAMT']))
                         <tr>
                             <td>{{ Lang::get('labels.shipping') }}</td>
-                            <td>@if (isset($transaction_details['SHIPPINGAMT'])) {{ number_format($transaction_details['SHIPPINGAMT'],2) }} @endif</td>
+                            <td>{{ Format::getCurrencyFormat($transaction_details['SHIPPINGAMT']) }}</td>
                         </tr>
                         @endif
 
                         @if (isset($transaction_details['HANDLINGAMT']))
                         <tr>
                             <td>{{ Lang::get('labels.handling') }}</td>
-                            <td>@if (isset($transaction_details['HANDLINGAMT'])) {{ number_format($transaction_details['HANDLINGAMT'],2) }} @endif</td>
+                            <td>{{ Format::getCurrencyFormat($transaction_details['HANDLINGAMT']) }}</td>
                         </tr>
                         @endif
 
                         @if (isset($transaction_details['AMT']))
                         <tr>
                             <td>{{ Lang::get('labels.total') }} ({{ Lang::get('labels.fee') }})</td>
-                            <td>{{ number_format($transaction_details['AMT'],2) }} (-{{ $transaction_details['FEEAMT'] or '0.00' }})</td>
+                            <td>{{ Format::getCurrencyFormat($transaction_details['AMT']) }} (-<span class="fee">{{ Format::getCurrencyFormat($transaction_details['FEEAMT']) }}</span>)</td>
                         </tr>
                         @endif
 
                         @if (isset($transaction_details['NETAMT']))
                         <tr>
                             <td>{{ Lang::get('labels.net') }}</td>
-                            <td>{{ number_format($transaction_details['NETAMT'],2) }}</td>
+                            <td>{{ Format::getCurrencyFormat($transaction_details['NETAMT']) }}</td>
                         </tr>
                         @endif
 
@@ -204,7 +204,7 @@
                             <td>{{ $order_item['L_NAME'] }}</td>
                             <td>{{ $order_item['L_QTY'] }}</td>
                             @if ($order_item['L_AMT'] > 0)
-                            <td>{{ number_format($order_item['L_AMT'],2) }}</td>
+                            <td>{{ Format::getCurrencyFormat($order_item['L_AMT']) }}</td>
                             @else
                             <td>&nbsp;</td>
                             @endif
