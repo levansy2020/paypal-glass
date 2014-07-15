@@ -9,7 +9,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{ Lang::get('panel-headers.current-balance') }}</div>
             <div class="panel-body">
-                {{ Lang::get('currency.symbol') }}{{ number_format($data['current_balance'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}
+                {{ Format::getCurrencyFormat($data['current_balance']) }}
             </div>
         </div>
     </div>
@@ -63,18 +63,9 @@
                             <td class="center">{{ $transaction['L_TYPE'] }}</td>
                             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
                             <td class="center">{{ $transaction['L_STATUS'] }}</td>
-                            <?php
-                            /**
-                             * @todo
-                             * I need to make a function to return
-                             * amounts formatted in the local currency
-                             * using language files to use where outputting
-                             * amounts instead of what I'm doing here.
-                             */
-                            ?>
-                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($transaction['L_AMT'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
-                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($transaction['L_FEEAMT'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
-                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($transaction['L_NETAMT'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
+                            <td class="center">{{ Format::getCurrencyFormat($transaction['L_AMT']) }}</td>
+                            <td class="center">{{ Format::getCurrencyFormat($transaction['L_FEEAMT']) }}</td>
+                            <td class="center">{{ Format::getCurrencyFormat($transaction['L_NETAMT']) }}</td>
                         </tr>
                         @endforeach
                         </tbody>
