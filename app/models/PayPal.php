@@ -35,7 +35,7 @@ class PayPal {
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
-            $Balance = number_format($PayPalResult['BALANCERESULTS'][0]['L_AMT'],2);
+            $Balance = $PayPalResult['BALANCERESULTS'][0]['L_AMT'];
             return $Balance;
         }
         else
