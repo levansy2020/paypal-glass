@@ -74,7 +74,8 @@
                             <td class="center">{{ date('m-d-Y',strtotime($transaction['L_TIMESTAMP'])) }}</td>
                             @if (strtoupper($transaction['L_TYPE']) != 'TEMPORARY HOLD'
                             && strtoupper($transaction['L_TYPE']) != 'MASS PAYMENT SENT'
-                            && strtoupper($transaction['L_TYPE']) != 'FEE REVERSAL')
+                            && strtoupper($transaction['L_TYPE']) != 'FEE REVERSAL'
+                            && strtoupper($transaction['L_TYPE']) != 'UNCLAIMED FUNDS RETURNED')
                             <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{ $transaction['L_TRANSACTIONID'] }}</a></td>
                             @else
                             <td class="center">{{ $transaction['L_TRANSACTIONID'] }}</td>
