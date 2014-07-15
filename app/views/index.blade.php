@@ -3,11 +3,17 @@
 @section('page_title') {{ Lang::get('page-names.overview') }} @stop
 @section('page_name') {{ Lang::get('page-names.overview') }} @stop
 
-@section('first-row')
-
-@stop
-
 @section('content')
+<div class="row">
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ Lang::get('panel-headers.current-balance') }}</div>
+            <div class="panel-body">
+                {{ Format::getCurrencyFormat($data['current_balance']) }}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">

@@ -92,17 +92,6 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
-    <div class="row">
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ Lang::get('panel-headers.current-balance') }}</div>
-                <div class="panel-body">
-                    {{ Format::getCurrencyFormat($data['current_balance']) }}
-                </div>
-            </div>
-        </div>
-        @yield('first-row')
-    </div>
     @yield('content')
 </div>
 <!-- /#page-wrapper -->
