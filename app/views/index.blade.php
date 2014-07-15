@@ -57,6 +57,12 @@
                          * calculate the amounts, but this should probably
                          * be moved into the model and passed along so it's
                          * available here.
+                         *
+                         * @todo
+                         * I also need to make a function to return
+                         * amounts formatted in the local currency
+                         * using language files to use where outputting
+                         * amounts.
                          */
                         if(strtoupper($transaction['L_TYPE']) != 'REFUND')
                         {
