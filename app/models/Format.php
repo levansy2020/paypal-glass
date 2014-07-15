@@ -17,10 +17,17 @@ class Format {
      * @param $amount
      * @return string
      */
-    public static function getCurrencyFormat($amount)
+    public static function getCurrencyFormat($amount = '', $symbol = true)
     {
-        $currency_format_amount = Lang::get('currency.symbol') .
-            number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+        if($symbol)
+        {
+            $currency_format_amount = Lang::get('currency.symbol') .
+                number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+        }
+        else
+        {
+            $currency_format_amount = number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+        }
 
         return $currency_format_amount;
     }
