@@ -76,7 +76,7 @@
                 <br />
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITY']))
-                    {{ Lang::get('labels.seller-protection') }}: {{ $transaction_details['PROTECTIONELIGIBILITY'] }}
+                    {{ Lang::get('labels.seller-protection') }}: {{ Lang::get('paypal.'.$transaction_details['PROTECTIONELIGIBILITY']) }}
                 @endif
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITYTYPE'])

@@ -26,4 +26,8 @@ return array(
     "recurring_payment" => "Recurring Payment",
 
     "sendmoney" => "Send Money",
+
+    "Ineligible" => "Ineligible",
+
+    "Eligible" => "Eligible",
 );
