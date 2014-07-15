@@ -50,34 +50,6 @@
                         </thead>
                         <tbody>
                         @foreach ($data['recent_history'] as $transaction)
-                        <?php
-                        /**
-                         * @todo
-                         * I put this here for now so I could quickly
-                         * calculate the amounts, but this should probably
-                         * be moved into the model and passed along so it's
-                         * available here.
-                         *
-                         * @todo
-                         * I also need to make a function to return
-                         * amounts formatted in the local currency
-                         * using language files to use where outputting
-                         * amounts.
-                         */
-                        if(strtoupper($transaction['L_TYPE']) != 'REFUND')
-                        {
-                            $net_amount = number_format($transaction['L_NETAMT'],2);
-                            $fee_amount = str_replace('-','',$transaction['L_FEEAMT']);
-                            $fee_amount = '-'.number_format($fee_amount,2);
-                            $gross_amount = number_format($transaction['L_AMT'],2);
-                        }
-                        else
-                        {
-                            $net_amount = number_format($transaction['L_NETAMT'],2);
-                            $fee_amount = number_format($transaction['L_FEEAMT'],2);
-                            $gross_amount = number_format($net_amount - $fee_amount,2);
-                        }
-                        ?>
                         <tr class="odd gradeX">
                             <td class="center">{{ date('m-d-Y',strtotime($transaction['L_TIMESTAMP'])) }}</td>
                             @if (strtoupper($transaction['L_TYPE']) != 'TEMPORARY HOLD'
@@ -91,9 +63,18 @@
                             <td class="center">{{ $transaction['L_TYPE'] }}</td>
                             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
                             <td class="center">{{ $transaction['L_STATUS'] }}</td>
-                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($gross_amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
-                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($fee_amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
-                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($net_amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
+                            <?php
+                            /**
+                             * @todo
+                             * I need to make a function to return
+                             * amounts formatted in the local currency
+                             * using language files to use where outputting
+                             * amounts instead of what I'm doing here.
+                             */
+                            ?>
+                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($transaction['L_AMT'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
+                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($transaction['L_FEEAMT'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
+                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($transaction['L_NETAMT'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
                         </tr>
                         @endforeach
                         </tbody>
