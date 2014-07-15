@@ -8,7 +8,9 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">{{ Lang::get('panel-headers.current-balance') }}</div>
-            <div class="panel-body">{{ $data['current_balance'] }}</div>
+            <div class="panel-body">
+                {{ Lang::get('currency.symbol') }}{{ number_format($data['current_balance'],2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}
+            </div>
         </div>
     </div>
     <div class="col-md-4">
@@ -83,9 +85,9 @@
                             <td class="center">{{ $transaction['L_TYPE'] }}</td>
                             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
                             <td class="center">{{ $transaction['L_STATUS'] }}</td>
-                            <td class="center">{{ $gross_amount }}</td>
-                            <td class="center">{{ $fee_amount }}</td>
-                            <td class="center">{{ $net_amount }}</td>
+                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($gross_amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
+                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($fee_amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
+                            <td class="center">{{ Lang::get('currency.symbol') }}{{ number_format($net_amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator')) }}</td>
                         </tr>
                         @endforeach
                         </tbody>
