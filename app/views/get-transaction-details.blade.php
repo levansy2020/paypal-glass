@@ -129,8 +129,18 @@
 
                         @if (isset($transaction_details['AMT']))
                         <tr>
-                            <td>{{ Lang::get('labels.total') }} ({{ Lang::get('labels.fee') }})</td>
-                            <td>{{ Format::getCurrencyFormat($transaction_details['AMT']) }} (-<span class="fee">{{ Format::getCurrencyFormat($transaction_details['FEEAMT']) }}</span>)</td>
+                            <td>
+                                {{ Lang::get('labels.total') }}
+                                @if(isset($transaction_details['FEEAMT']))
+                                    ({{ Lang::get('labels.fee') }})
+                                @endif
+                            </td>
+                            <td>
+                                {{ Format::getCurrencyFormat($transaction_details['AMT']) }}
+                                @if (isset($transaction_details['FEEAMT']))
+                                    (-<span class="fee">{{ Format::getCurrencyFormat($transaction_details['FEEAMT']) }}</span>)
+                                @endif
+                            </td>
                         </tr>
                         @endif
 
