@@ -25,4 +25,6 @@ return array(
 
     "recent-transactions" => "Recent Transactions (Last 24 Hours)",
 
+    "error" => "Error",
+
 );

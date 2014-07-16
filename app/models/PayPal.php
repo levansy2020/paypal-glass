@@ -25,7 +25,7 @@ class PayPal {
     }
 
     /**
-     * GetBalance
+     * GetBalance API Request
      */
     public function getBalance()
     {
@@ -35,17 +35,32 @@ class PayPal {
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
+            /**
+             * Returns first balance result.
+             *
+             * @todo
+             * Enhance this by allowing users to specify
+             * which currency balance they want to return,
+             * or go ahead and display all currency values
+             * on overview instead of just one.
+             */
             $Balance = $PayPalResult['BALANCERESULTS'][0]['L_AMT'];
             return $Balance;
         }
         else
         {
-            return 'Balance not available.';
+            /**
+             * Store errors in flash and return false.
+             */
+            $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
+            Session::flash('errors', $errors);
+
+            return false;
         }
     }
 
     /**
-     * GetTransactionDetails
+     * GetTransactionDetails API Request
      */
     public function getTransactionDetails($transaction_id)
     {
@@ -77,14 +92,18 @@ class PayPal {
         }
         else
         {
-            // Failure
-            $errors = $PayPalResult['ERRORS'];
-            return $errors;
+            /**
+             * Store errors in flash and return false.
+             */
+            $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
+            Session::flash('errors', $errors);
+
+            return false;
         }
     }
 
     /**
-     * TransactionSearch
+     * TransactionSearch API Request
      */
     public function transactionSearch($params)
     {
@@ -151,8 +170,13 @@ class PayPal {
         }
         else
         {
-            // Failure
-            return 'No results.';
+            /**
+             * Store errors in flash and return false.
+             */
+            $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
+            Session::flash('errors', $errors);
+
+            return false;
         }
     }
 }

@@ -15,4 +15,6 @@ return array(
 
     "overview" => "Overview",
 
+    "error" => "Error",
+
 );

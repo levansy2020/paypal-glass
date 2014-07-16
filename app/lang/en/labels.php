@@ -47,4 +47,12 @@ return array(
 
     "net" => "Net",
 
+    "code" => "Code",
+
+    "short-message" => "Short Message",
+
+    "long-message" => "Long Message",
+
+    "severity-code" => "Severity Code",
+
 );

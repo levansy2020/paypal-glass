@@ -19,3 +19,5 @@ Route::get('/login', function()
 });
 
 Route::get('/transaction/{transaction_id}', 'PageController@getTransactionDetails');
+
+Route::get('/error', 'PageController@error');
