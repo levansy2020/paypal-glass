@@ -47,4 +47,16 @@ return array(
 
     'API_SIGNATURE' => $_ENV['PAYPAL_API_SIGNATURE'],
 
+    /*
+	|--------------------------------------------------------------------------
+	| Raw API Dump
+	|--------------------------------------------------------------------------
+	|
+	| Enable / Disable the raw API request/response dump at the bottom of
+    | pages.
+	|
+	*/
+
+    'RAW_API_DUMP' => TRUE,
+
 );

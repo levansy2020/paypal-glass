@@ -59,6 +59,7 @@
         </div>
     </div>
 </div>
+@if (Config::get('paypal.RAW_API_DUMP'))
 <div class="row">
     <div class="col-lg-12">
         <pre>
@@ -66,4 +67,5 @@
         </pre>
     </div>
 </div>
+@endif
 @stop
