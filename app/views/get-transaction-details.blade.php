@@ -230,11 +230,10 @@
     </div>
     @endif
 </div>
-
 <div class="row">
-<?php
-echo '<pre />';
-print_r($transaction_details);
-?>
-</div>
-@stop
+    <div class="col-lg-12">
+        <pre>
+            {{ print_r($transaction_details) }}
+        </pre>
+    </div>
+</div>@stop

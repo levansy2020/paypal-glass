@@ -40,7 +40,8 @@
                         @foreach ($data['recent_history'] as $transaction)
                         <tr class="odd gradeX">
                             <td class="center">{{ date('m-d-Y',strtotime($transaction['L_TIMESTAMP'])) }}</td>
-                            <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{ $transaction['L_TRANSACTIONID'] }}</a></td>
+                            <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{
+                                    $transaction['L_TRANSACTIONID'] }}</a></td>
                             <td class="center">{{ $transaction['L_TYPE'] }}</td>
                             <td class="center">{{ $transaction['L_EMAIL'] }}</td>
                             <td class="center">{{ $transaction['L_STATUS'] }}</td>
@@ -59,9 +60,10 @@
     </div>
 </div>
 <div class="row">
-    <?php
-    echo '<pre />';
-    print_r($data['recent_history']);
-    ?>
+    <div class="col-lg-12">
+        <pre>
+            {{ print_r($data['recent_history']) }}
+        </pre>
+    </div>
 </div>
 @stop
