@@ -24,6 +24,14 @@ class PayPal {
         );
     }
 
+    public function logger($type = 'info', $name = '', $data = array())
+    {
+        if(Config::get('paypal.api-log'))
+        {
+            Log::$type($name, $data);
+        }
+    }
+
     /**
      * GetBalance API Request
      */
@@ -32,6 +40,15 @@ class PayPal {
         $GBFields = array('returnallcurrencies' => true);
         $PayPalRequestData = array('GBFields'=>$GBFields);
         $PayPalResult = $this->PayPal->GetBalance($PayPalRequestData);
+
+        // API Logs
+        $log_type = $this->PayPal->APICallSuccessful($PayPalResult['ACK']) ? 'info' : 'error';
+        $log_name = 'PayPal API Result';
+        $log_data = array(
+            'API Request' => $this->PayPal->MaskAPIResult($PayPalResult['RAWREQUEST']),
+            'API Response' => $PayPalResult['RAWRESPONSE']
+        );
+        $this->logger($log_type, $log_name, $log_data);
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
@@ -82,6 +99,15 @@ class PayPal {
         $nettotal = isset($PayPalResult['AMT']) ? $PayPalResult['AMT'] : 0;
         $nettotal = isset($PayPalResult['FEEAMT']) ? $nettotal - $PayPalResult['FEEAMT'] : $nettotal;
         $PayPalResult['NETAMT'] = $nettotal;
+
+        // API Logs
+        $log_type = $this->PayPal->APICallSuccessful($PayPalResult['ACK']) ? 'info' : 'error';
+        $log_name = 'PayPal API Result';
+        $log_data = array(
+            'API Request' => $this->PayPal->MaskAPIResult($PayPalResult['RAWREQUEST']),
+            'API Response' => $PayPalResult['RAWRESPONSE']
+        );
+        $this->logger($log_type, $log_name, $log_data);
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
@@ -157,6 +183,15 @@ class PayPal {
 
         // Pass data into class for processing with PayPal and load the response array into $PayPalResult
         $PayPalResult = $this->PayPal->TransactionSearch($PayPalRequestData);
+
+        // API Logs
+        $log_type = $this->PayPal->APICallSuccessful($PayPalResult['ACK']) ? 'info' : 'error';
+        $log_name = 'PayPal API Result';
+        $log_data = array(
+            'API Request' => $this->PayPal->MaskAPIResult($PayPalResult['RAWREQUEST']),
+            'API Response' => $PayPalResult['RAWRESPONSE']
+        );
+        $this->logger($log_type, $log_name, $log_data);
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
