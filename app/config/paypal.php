@@ -12,7 +12,7 @@ return array(
     |
     */
 
-    'SANDBOX' => $_ENV['PAYPAL_SANDBOX'],
+    'sandbox' => $_ENV['PAYPAL_SANDBOX'],
 
     /*
 	|--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ return array(
 	|
 	*/
 
-    'API_USERNAME' => $_ENV['PAYPAL_API_USERNAME'],
+    'api-username' => $_ENV['PAYPAL_API_USERNAME'],
 
     /*
 	|--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return array(
 	|
 	*/
 
-    'API_PASSWORD' => $_ENV['PAYPAL_API_PASSWORD'],
+    'api-password' => $_ENV['PAYPAL_API_PASSWORD'],
 
     /*
 	|--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return array(
 	|
 	*/
 
-    'API_SIGNATURE' => $_ENV['PAYPAL_API_SIGNATURE'],
+    'api-signature' => $_ENV['PAYPAL_API_SIGNATURE'],
 
     /*
 	|--------------------------------------------------------------------------
@@ -57,6 +57,6 @@ return array(
 	|
 	*/
 
-    'RAW_API_DUMP' => TRUE,
+    'raw-api-dump' => TRUE,
 
 );

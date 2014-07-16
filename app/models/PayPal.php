@@ -17,10 +17,10 @@ class PayPal {
     private function getPayPalConfig()
     {
         return array(
-            'Sandbox' => Config::get('paypal.SANDBOX'),
-            'APIUsername' => Config::get('paypal.API_USERNAME'),
-            'APIPassword' => Config::get('paypal.API_PASSWORD'),
-            'APISignature' => Config::get('paypal.API_SIGNATURE')
+            'Sandbox' => Config::get('paypal.sandbox'),
+            'APIUsername' => Config::get('paypal.api-username'),
+            'APIPassword' => Config::get('paypal.api-password'),
+            'APISignature' => Config::get('paypal.api-signature')
         );
     }
 
@@ -49,9 +49,7 @@ class PayPal {
         }
         else
         {
-            /**
-             * Store errors in flash and return false.
-             */
+            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
 
@@ -92,9 +90,7 @@ class PayPal {
         }
         else
         {
-            /**
-             * Store errors in flash and return false.
-             */
+            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
 
@@ -170,9 +166,7 @@ class PayPal {
         }
         else
         {
-            /**
-             * Store errors in flash and return false.
-             */
+            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
 

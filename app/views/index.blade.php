@@ -59,7 +59,7 @@
         </div>
     </div>
 </div>
-@if (Config::get('paypal.RAW_API_DUMP'))
+@if (Config::get('paypal.raw-api-dump'))
 <div class="row">
     <div class="col-lg-12">
         <pre>
