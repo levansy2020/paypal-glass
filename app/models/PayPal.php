@@ -24,6 +24,15 @@ class PayPal {
         );
     }
 
+    /**
+     * logger()
+     *
+     * Log data with ability to pass in type, name, and log data.
+     *
+     * @param string $type
+     * @param string $name
+     * @param array $data
+     */
     public function logger($type = 'info', $name = '', $data = array())
     {
         if(Config::get('paypal.api-log'))
