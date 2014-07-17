@@ -42,7 +42,8 @@
                 @endif
 
                 @if (isset($transaction_details['PARENTTRANSACTIONID']))
-                    {{ Lang::get('labels.parent-transaction-id') }}: {{ $transaction_details['PARENTTRANSACTIONID'] }}<br />
+                    {{ Lang::get('labels.parent-transaction-id') }}:
+                    <a href="/transaction/{{ $transaction_details['PARENTTRANSACTIONID'] }}">{{ $transaction_details['PARENTTRANSACTIONID'] }}</a><br />
                 @endif
 
                 @if (isset($transaction_details['INVNUM']))
