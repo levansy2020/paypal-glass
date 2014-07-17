@@ -176,7 +176,8 @@
             <div class="panel-heading">{{ Lang::get('panel-headers.actions') }}</div>
             <div class="panel-body">
                 @if (isset($transaction_details['PAYMENTSTATUS'])
-                && strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED'
+                && (strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED'
+                || strtoupper($transaction_details['PAYMENTSTATUS']) == 'PARTIALLYREFUNDED')
                 && strtoupper($transaction_details['TRANSACTIONTYPE']) != 'SENDMONEY')
                     <a href="/transaction/{{ $transaction_details['TRANSACTIONID'] }}/refund?amount={{ $transaction_details['AMT'] }} ">
                     <button type="button" class="btn btn-default">{{ Lang::get('buttons.refund') }}</button>
