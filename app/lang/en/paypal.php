@@ -30,4 +30,6 @@ return array(
     "Ineligible" => "Ineligible",
 
     "Eligible" => "Eligible",
+
+    "expresscheckout" => "Express Checkout",
 );
