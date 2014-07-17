@@ -19,5 +19,7 @@ Route::get('/login', function()
 });
 
 Route::get('/transaction/{transaction_id}', 'PageController@getTransactionDetails');
+Route::get('/transaction/{transaction_id}/refund', 'PageController@refundTransaction');
+Route::post('/transaction/{transaction_id}/refund', 'PageController@refundTransaction');
 
 Route::get('/error', 'PageController@error');

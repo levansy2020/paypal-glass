@@ -17,4 +17,6 @@ return array(
 
 	"capture" => "Capture",
 
+    "cancel" => "Cancel",
+
 );

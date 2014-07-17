@@ -23,7 +23,7 @@ class PageController extends \BaseController {
 
     public function errorCheck()
     {
-        if(Session::has('errors'))
+        if(Session::has('errors') && Session::get('errors.0.L_ERRORCODE'))
         {
             throw new Exception('paypal');
         }
@@ -38,7 +38,7 @@ class PageController extends \BaseController {
         {
             // GetBalance
             $current_balance = $this->PayPal->getBalance();
-            $this->error();
+            $this->errorCheck();
 
             // TransactionSearch
             $params = array(
@@ -58,7 +58,10 @@ class PageController extends \BaseController {
 	}
 
     /**
-     * Transaction Details
+     * GetTransactionDetails API
+     *
+     * @param $transaction_id
+     * @return mixed
      */
     public function getTransactionDetails($transaction_id)
     {
@@ -66,11 +69,49 @@ class PageController extends \BaseController {
         {
             // GetTransactionDetails
             $transaction_details = $this->PayPal->getTransactionDetails($transaction_id);
+            $this->errorCheck();
+
             return View::make('get-transaction-details')->with('transaction_details', $transaction_details);
         }
         catch(Exception $e)
         {
             return Redirect::to('error');
+        }
+    }
+
+    public function refundTransaction($transaction_id)
+    {
+        if(Request::isMethod('get'))
+        {
+            // Load refund view
+            $amount = Input::get('amount');
+            $data = array('transaction_id' => $transaction_id, 'amount' => $amount);
+            return View::make('refund-transaction')->with('data', $data);
+        }
+        else
+        {
+            try
+            {
+                // Process Refund
+                $refund_type = Input::get('refund_amount') < Input::get('original_amount') ? 'Partial' : 'Full';
+                $params = array(
+                    'transaction_id' => $transaction_id,
+                    'original_amount' => Input::get('original_amount'),
+                    'amount' => Input::get('refund_amount'),
+                    'invoice_number' => Input::get('invoice_number'),
+                    'notes' => Input::get('notes'),
+                    'invoice_id' => Input::get('invoice_number'),
+                    'refund_type' => $refund_type,
+                );
+                $refund = $this->PayPal->refundTransaction($params);
+                $this->errorCheck();
+
+                return Redirect::to('/');
+            }
+            catch(Exception $e)
+            {
+                return Redirect::to('error');
+            }
         }
     }
 

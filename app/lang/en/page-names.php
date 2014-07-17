@@ -17,4 +17,5 @@ return array(
 
     "error" => "Error",
 
+    "refund" => "Refund Transaction",
 );
