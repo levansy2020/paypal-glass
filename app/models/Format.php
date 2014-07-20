@@ -18,14 +18,21 @@ class Format {
      */
     public static function getCurrencyFormat($amount = '', $symbol = true)
     {
-        if($symbol)
+        if($amount > 0 || $amount < 0)
         {
-            $currency_format_amount = Lang::get('currency.symbol') .
-                number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+            if($symbol)
+            {
+                $currency_format_amount = Lang::get('currency.symbol') .
+                    number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+            }
+            else
+            {
+                $currency_format_amount = number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+            }
         }
         else
         {
-            $currency_format_amount = number_format($amount,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+            $currency_format_amount = '';
         }
 
         return $currency_format_amount;
