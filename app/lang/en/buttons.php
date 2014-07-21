@@ -13,6 +13,8 @@ return array(
 
 	"refund" => "Refund",
 
+    "process-refund" => "Process Refund",
+
 	"void" => "Void",
 
 	"capture" => "Capture",
