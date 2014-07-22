@@ -32,4 +32,10 @@ return array(
     "Eligible" => "Eligible",
 
     "expresscheckout" => "Express Checkout",
+
+    "subscrpayment" => "Subscription Payment",
+
+    "echeck" => "eCheck",
+
+    "Pending" => "Pending",
 );

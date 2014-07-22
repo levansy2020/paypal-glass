@@ -61,11 +61,11 @@
                 <br />
 
                 @if (isset($transaction_details['PAYMENTSTATUS']))
-                    {{ Lang::get('labels.payment-status') }}: {{ $transaction_details['PAYMENTSTATUS'] }}
+                    {{ Lang::get('labels.payment-status') }}: {{ Lang::get('paypal.'.$transaction_details['PAYMENTSTATUS']) }}
                 @endif
 
                 @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING')
-                    ({{ ucwords($transaction_details['PENDINGREASON']) }}
+                    ({{ Lang::get('paypal.'.$transaction_details['PENDINGREASON']) }}
 
                     @if (strtoupper($transaction_details['REASONCODE']) != 'NONE'))
                         / {{ $transaction_details['REASONCODE'] }})
