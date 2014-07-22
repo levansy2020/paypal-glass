@@ -61,11 +61,11 @@
                 <br />
 
                 @if (isset($transaction_details['PAYMENTSTATUS']))
-                    {{ Lang::get('labels.payment-status') }}: {{ $transaction_details['PAYMENTSTATUS'] }}
+                    {{ Lang::get('labels.payment-status') }}: {{ Lang::get('paypal.'.strtolower($transaction_details['PAYMENTSTATUS'])) }}
                 @endif
 
                 @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING')
-                    ({{ ucwords($transaction_details['PENDINGREASON']) }}
+                    ({{ Lang::get('paypal.'.$transaction_details['PENDINGREASON']) }}
 
                     @if (strtoupper($transaction_details['REASONCODE']) != 'NONE'))
                         / {{ $transaction_details['REASONCODE'] }})
@@ -77,7 +77,7 @@
                 <br />
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITY']))
-                    {{ Lang::get('labels.seller-protection') }}: {{ Lang::get('paypal.'.$transaction_details['PROTECTIONELIGIBILITY']) }}
+                    {{ Lang::get('labels.seller-protection') }}: {{ Lang::get('paypal.'.strtolower($transaction_details['PROTECTIONELIGIBILITY'])) }}
                 @endif
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITYTYPE'])

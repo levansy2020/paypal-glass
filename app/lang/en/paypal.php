@@ -27,9 +27,15 @@ return array(
 
     "sendmoney" => "Send Money",
 
-    "Ineligible" => "Ineligible",
+    "ineligible" => "Ineligible",
 
-    "Eligible" => "Eligible",
+    "eligible" => "Eligible",
 
     "expresscheckout" => "Express Checkout",
+
+    "subscrpayment" => "Subscription Payment",
+
+    "echeck" => "eCheck",
+
+    "pending" => "Pending",
 );
