@@ -37,7 +37,7 @@ class PageController extends \BaseController {
         try
         {
             // GetBalance
-            $current_balance = $this->PayPal->getBalance();
+            $current_balance = $this->PayPal->getCurrentDefaultBalance();
             $this->errorCheck();
 
             // TransactionSearch

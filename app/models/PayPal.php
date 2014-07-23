@@ -5,6 +5,9 @@
  */
 class PayPal {
 
+    /**
+     * Constructor
+     */
     public function __construct(){
         $this->PayPal = new \angelleye\PayPal\PayPal($this->getPayPalConfig());
     }
@@ -42,11 +45,18 @@ class PayPal {
     }
 
     /**
-     * GetBalance API Request
+     * GetBalance API
+     *
+     * Get balance details for the PayPal account.
+     *
+     * @param $params
+     * @return array|bool
      */
-    public function getBalance()
+    public function getBalance($params)
     {
-        $GBFields = array('returnallcurrencies' => true);
+        $return_all_currencies = isset($params['return_all_currencies']) ? $params['return_all_currencies'] : false;
+
+        $GBFields = array('returnallcurrencies' => $return_all_currencies);
         $PayPalRequestData = array('GBFields'=>$GBFields);
         $PayPalResult = $this->PayPal->GetBalance($PayPalRequestData);
 
@@ -61,17 +71,7 @@ class PayPal {
 
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
-            /**
-             * Returns first balance result.
-             *
-             * @todo
-             * Enhance this by allowing users to specify
-             * which currency balance they want to return,
-             * or go ahead and display all currency values
-             * on overview instead of just one.
-             */
-            $Balance = $PayPalResult['BALANCERESULTS'][0]['L_AMT'];
-            return $Balance;
+            return $PayPalResult;
         }
         else
         {
@@ -81,6 +81,29 @@ class PayPal {
 
             return false;
         }
+    }
+
+    /**
+     * Returns the current default balance of the PayPal account.
+     *
+     * @return mixed
+     */
+    public function getCurrentDefaultBalance()
+    {
+        $params = array('return_all_currencies' => false);
+        $PayPalResult = $this->getBalance($params);
+
+        /**
+         * Returns first balance result.
+         *
+         * @todo
+         * Enhance this by allowing users to specify
+         * which currency balance they want to return,
+         * or go ahead and display all currency values
+         * on overview instead of just one.
+         */
+        $Balance = $PayPalResult['BALANCERESULTS'][0]['L_AMT'];
+        return $Balance;
     }
 
     /**
