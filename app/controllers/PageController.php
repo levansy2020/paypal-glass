@@ -43,15 +43,16 @@ class PageController extends \BaseController {
             // TransactionSearch
             $recent_history = $this->PayPal->getRecentHistory();
             $this->errorCheck();
-
-            // Make View
-            $data = array('current_balance' => $current_balance, 'recent_history' => $recent_history);
-            return View::make('index')->with('data', $data);
         }
         catch(Exception $e)
         {
             return Redirect::to('error');
         }
+
+        // Make View
+        $data = array('current_balance' => $current_balance, 'recent_history' => $recent_history);
+        return View::make('index')->with('data', $data);
+
 	}
 
     /**
@@ -62,18 +63,20 @@ class PageController extends \BaseController {
      */
     public function getTransactionDetails($transaction_id)
     {
+
         try
         {
             // GetTransactionDetails
             $transaction_details = $this->PayPal->getTransactionDetails($transaction_id);
             $this->errorCheck();
-
-            return View::make('get-transaction-details')->with('transaction_details', $transaction_details);
         }
         catch(Exception $e)
         {
             return Redirect::to('error');
         }
+
+        return View::make('get-transaction-details')->with('transaction_details', $transaction_details);
+
     }
 
     public function refundTransaction($transaction_id)
@@ -102,13 +105,14 @@ class PageController extends \BaseController {
                 );
                 $refund = $this->PayPal->refundTransaction($params);
                 $this->errorCheck();
-
-                return Redirect::to('/');
             }
             catch(Exception $e)
             {
                 return Redirect::to('error');
             }
+
+            return Redirect::to('/');
+
         }
     }
 
