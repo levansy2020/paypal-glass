@@ -32,7 +32,15 @@ class Format {
         }
         else
         {
-            $currency_format_amount = '';
+            if($symbol)
+            {
+                $currency_format_amount = Lang::get('currency.symbol') .
+                    number_format(0,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+            }
+            else
+            {
+                $currency_format_amount = number_format(0,2,Lang::get('currency.decimal-separator'),Lang::get('currency.thousands-separator'));
+            }
         }
 
         return $currency_format_amount;
