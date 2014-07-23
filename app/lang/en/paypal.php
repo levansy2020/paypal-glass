@@ -37,9 +37,7 @@ return array(
 
     "echeck" => "eCheck",
 
-<<<<<<< HEAD
     "pending" => "Pending",
-=======
-    "Pending" => "Pending",
->>>>>>> origin/dev
+
+    "completed" => "Completed",
 );

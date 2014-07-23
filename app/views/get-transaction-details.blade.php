@@ -32,7 +32,13 @@
                 @endif
 
                 @if (isset($transaction_details['PAYERSTATUS']))
-                    {{ Lang::get('labels.payer-status') }}: {{ Lang::get('paypal.'.strtolower($transaction_details['PAYERSTATUS'])) }}<br />
+                    {{ Lang::get('labels.payer-status') }}:
+
+                    @if (Lang::has('paypal.'.strtolower($transaction_details['PAYERSTATUS'])))
+                        {{ Lang::get('paypal.'.strtolower($transaction_details['PAYERSTATUS'])) }}
+                    @else
+                        {{ $transaction_details['PAYERSTATUS'] }}
+                    @endif<br />
                 @endif
 
                 <br />
@@ -51,21 +57,46 @@
                 @endif
 
                 @if (isset($transaction_details['TRANSACTIONTYPE']))
-                    {{ Lang::get('labels.transaction-type') }}: {{ ucfirst(Lang::get('paypal.'.strtolower($transaction_details['TRANSACTIONTYPE']))) }}
+                    {{ Lang::get('labels.transaction-type') }}:
+
+                    @if (Lang::has('paypal.'.strtolower($transaction_details['TRANSACTIONTYPE'])))
+                        {{ ucfirst(Lang::get('paypal.'.strtolower($transaction_details['TRANSACTIONTYPE']))) }}
+                    @else
+                        {{ ucfirst($transaction_details['TRANSACTIONTYPE']) }}
+                    @endif
+
                 @endif
 
                 @if (isset($transaction_details['PAYMENTTYPE']))
-                    ({{ Lang::get('paypal.'.strtolower($transaction_details['PAYMENTTYPE'])) }})
+
+                    @if (Lang::has('paypal.'.strtolower($transaction_details['PAYMENTTYPE'])))
+                        ({{ ucfirst(Lang::get('paypal.'.strtolower($transaction_details['PAYMENTTYPE']))) }})
+                    @else
+                        ({{ ucfirst($transaction_details['PAYMENTTYPE']) }})
+                    @endif
+
                 @endif
 
                 <br />
 
                 @if (isset($transaction_details['PAYMENTSTATUS']))
-                    {{ Lang::get('labels.payment-status') }}: {{ Lang::get('paypal.'.strtolower($transaction_details['PAYMENTSTATUS'])) }}
+                    {{ Lang::get('labels.payment-status') }}:
+
+                    @if (Lang::has('paypal.'.strtolower($transaction_details['PAYMENTSTATUS'])))
+                        {{ Lang::get('paypal.'.strtolower($transaction_details['PAYMENTSTATUS'])) }}
+                    @else
+                        {{ $transaction_details['PAYMENTSTATUS'] }}
+                    @endif
+
                 @endif
 
                 @if (isset($transaction_details['PAYMENTSTATUS']) && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING')
-                    ({{ Lang::get('paypal.'.$transaction_details['PENDINGREASON']) }}
+
+                    @if (Lang::has('paypal.'.$transaction_details['PENDINGREASON']))
+                        ({{ Lang::get('paypal.'.$transaction_details['PENDINGREASON']) }})
+                    @else
+                        ({{ $transaction_details['PENDINGREASON'] }})
+                    @endif
 
                     @if (strtoupper($transaction_details['REASONCODE']) != 'NONE'))
                         / {{ $transaction_details['REASONCODE'] }})
@@ -77,7 +108,14 @@
                 <br />
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITY']))
-                    {{ Lang::get('labels.seller-protection') }}: {{ Lang::get('paypal.'.strtolower($transaction_details['PROTECTIONELIGIBILITY'])) }}
+                    {{ Lang::get('labels.seller-protection') }}:
+
+                    @if (Lang::has('paypal.'.strtolower($transaction_details['PROTECTIONELIGIBILITY'])))
+                        {{ Lang::get('paypal.'.strtolower($transaction_details['PROTECTIONELIGIBILITY'])) }}
+                    @else
+                        {{ $transaction_details['PROTECTIONELIGIBILITY'] }}
+                    @endif
+
                 @endif
 
                 @if (isset($transaction_details['PROTECTIONELIGIBILITYTYPE'])
@@ -161,7 +199,15 @@
     @if (isset($transaction_details['SHIPTONAME']))
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">{{ Lang::get('panel-headers.shipping-address') }} ({{ Lang::get('paypal.'.strtolower($transaction_details['ADDRESSSTATUS'])) }})</div>
+            <div class="panel-heading">{{ Lang::get('panel-headers.shipping-address') }}
+
+                @if (Lang::has('paypal.'.strtolower($transaction_details['ADDRESSSTATUS'])))
+                    ({{ Lang::get('paypal.'.strtolower($transaction_details['ADDRESSSTATUS'])) }})
+                @else
+                    ({{ $transaction_details['ADDRESSSTATUS'] }})
+                @endif
+
+            </div>
             <div class="panel-body">
                 {{ $transaction_details['SHIPTONAME'] }}<br />
                 {{ $transaction_details['SHIPTOSTREET'] }}<br />
