@@ -95,14 +95,19 @@
                     @if (Lang::has('paypal.'.$transaction_details['PENDINGREASON']))
                         ({{ Lang::get('paypal.'.$transaction_details['PENDINGREASON']) }})
                     @else
-                        ({{ $transaction_details['PENDINGREASON'] }})
+                        ({{ $transaction_details['PENDINGREASON'] }}
                     @endif
 
                     @if (strtoupper($transaction_details['REASONCODE']) != 'NONE'))
-                        / {{ $transaction_details['REASONCODE'] }})
-                    @else
-                        )
+                        /
+                        @if (Lang::has('paypal.'.$transaction_details['REASONCODE']))
+                            {{ Lang::get('paypal.'.$transaction_details['REASONCODE']) }}
+                        @else
+                            {{ $transaction_details['REASONCODE'] }})
+                        @endif
+
                     @endif
+
                 @endif
 
                 <br />

@@ -40,4 +40,6 @@ return array(
     "pending" => "Pending",
 
     "completed" => "Completed",
+
+    "multicurrency" => "Muli-Currency",
 );
