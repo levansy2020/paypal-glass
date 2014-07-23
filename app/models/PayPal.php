@@ -91,7 +91,7 @@ class PayPal {
     public function getCurrentDefaultBalance()
     {
         $params = array('return_all_currencies' => false);
-        $PayPalResult = $this->getBalance($params);
+        $result = $this->getBalance($params);
 
         /**
          * Returns first balance result.
@@ -102,7 +102,7 @@ class PayPal {
          * or go ahead and display all currency values
          * on overview instead of just one.
          */
-        $Balance = $PayPalResult['BALANCERESULTS'][0]['L_AMT'];
+        $Balance = $result['BALANCERESULTS'][0]['L_AMT'];
         return $Balance;
     }
 
@@ -228,8 +228,7 @@ class PayPal {
         if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
         {
             // Success
-            $SearchResults = isset($PayPalResult['SEARCHRESULTS']) ? $PayPalResult['SEARCHRESULTS'] : array();
-            return $SearchResults;
+            return $PayPalResult;
         }
         else
         {
@@ -241,6 +240,27 @@ class PayPal {
         }
     }
 
+    /**
+     * Return recent history via TransactionSearch
+     *
+     * @param int $days
+     * @return array
+     */
+    public function getRecentHistory($days = 1)
+    {
+        $params = array('number_of_days' => $days);
+        $result = $this->transactionSearch($params);
+
+        $search_results = isset($result['SEARCHRESULTS']) ? $result['SEARCHRESULTS'] : array();
+        return $search_results;
+    }
+
+    /**
+     * RefundTransaction API
+     *
+     * @param $params
+     * @return array|bool
+     */
     public function refundTransaction($params)
     {
         $transaction_id = isset($params['transaction_id']) ? $params['transaction_id'] : '';

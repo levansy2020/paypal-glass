@@ -41,10 +41,7 @@ class PageController extends \BaseController {
             $this->errorCheck();
 
             // TransactionSearch
-            $params = array(
-                'number_of_days' => 1
-            );
-            $recent_history = $this->PayPal->transactionSearch($params);
+            $recent_history = $this->PayPal->getRecentHistory();
             $this->errorCheck();
 
             // Make View
