@@ -44,6 +44,45 @@ class PayPal {
         }
     }
 
+    public function addressVerify($params)
+    {
+        $email = isset($params['email']) ? $params['email'] : '';
+        $street = isset($params['street']) ? $params['street'] : '';
+        $zip = isset($params['zip']) ? $params['zip'] : '';
+
+        $AVFields = array
+        (
+            'email' => $email, 							// Required. Email address of PayPal member to verify.
+            'street' => $street, 						// Required. First line of the postal address to verify.  35 char max.
+            'zip' => $zip								// Required.  Postal code to verify.
+        );
+
+        $PayPalRequestData = array('AVFields'=>$AVFields);
+        $PayPalResult = $PayPal->AddressVerify($PayPalRequestData);
+
+        // API Logs
+        $log_type = $this->PayPal->APICallSuccessful($PayPalResult['ACK']) ? 'info' : 'error';
+        $log_name = 'PayPal API Result';
+        $log_data = array(
+            'API Request' => $this->PayPal->MaskAPIResult($PayPalResult['RAWREQUEST']),
+            'API Response' => $PayPalResult['RAWRESPONSE']
+        );
+        $this->logger($log_type, $log_name, $log_data);
+
+        if($this->PayPal->APICallSuccessful($PayPalResult['ACK']))
+        {
+            return $PayPalResult;
+        }
+        else
+        {
+            // Store errors in flash and return false.
+            $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
+            Session::flash('errors', $errors);
+
+            return false;
+        }
+    }
+
     /**
      * GetBalance API
      *
