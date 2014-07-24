@@ -201,8 +201,7 @@ class PayPal {
     public function transactionSearch($params)
     {
         // Prepare request arrays
-        $number_of_days = isset($params['number_of_days']) ? $params['number_of_days'] : 1;
-        $start_date = gmdate("Y-m-d\\TH:i:sZ",strtotime('now - ' . $number_of_days . ' days'));
+        $start_date = isset($params['start_date']) ? $params['start_date'] : '';
         $end_date = isset($params['end_date']) ? $params['end_date'] : '';
         $email = isset($params['email']) ? $params['email'] : '';
         $receiver = isset($params['receiver']) ? $params['receiver'] : '';
@@ -287,7 +286,8 @@ class PayPal {
      */
     public function getRecentHistory($days = 1)
     {
-        $params = array('number_of_days' => $days);
+        $start_date = gmdate("Y-m-d\\TH:i:sZ",strtotime('now - ' . $days . ' days'));
+        $params = array('start_date' => $start_date);
         $result = $this->transactionSearch($params);
 
         $search_results = isset($result['SEARCHRESULTS']) ? $result['SEARCHRESULTS'] : array();
