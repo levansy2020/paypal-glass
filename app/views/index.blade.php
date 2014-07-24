@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('page_level_css')
+<link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+@stop
+
 @section('page_title') {{ Lang::get('page-names.overview') }} @stop
 @section('page_name') {{ Lang::get('page-names.overview') }} @stop
 
@@ -23,7 +27,7 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" id="recent_transactions">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -68,4 +72,14 @@
     </div>
 </div>
 @endif
+@stop
+
+@section('page_level_js')
+<script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#recent_transactions').dataTable();
+    });
+</script>
 @stop
