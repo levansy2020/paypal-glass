@@ -140,6 +140,24 @@ class PageController extends \BaseController {
         }
         else
         {
+            // Date range POSTed.
+            try
+            {
+                $start_date = Request::has('start_date') ? gmdate('Y-m-d 00:00:00', strtotime(Request::get('start_date'))) : '';
+                $end_date = Request::has('end_date') ? gmdate('Y-m-d 23:59:59', strtotime(Request::get('end_date'))) : '';
+
+                $params = array('start_date' => $start_date, 'end_date' => $end_date);
+                $paypal_result = $this->PayPal->transactionSearch($params);
+                $transaction_history = $paypal_result['SEARCHRESULTS'];
+                $this->errorCheck();
+
+                $data = array('transaction_history' => $transaction_history);
+                return View::make('transaction-history')->with('data', $data);
+            }
+            catch(Exception $e)
+            {
+                return Redirect::to('error');
+            }
 
         }
     }

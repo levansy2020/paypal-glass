@@ -2,6 +2,7 @@
 
 @section('page_level_css')
 <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 @stop
 
 @section('page_title') {{ Lang::get('page-names.transaction-history') }} @stop
@@ -9,13 +10,17 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Header
+                Filters
             </div>
             <div class="panel-body">
-                &nbsp;
+                {{ Form::open() }}
+                From {{ Form::text('start_date', '', array('id'=>'start_date', 'size'=>'10')) }} to
+                {{ Form::text('end_date', '', array('id'=>'end_date', 'size'=>'10')) }}
+                {{ Form::submit('Get Date Range') }}
+                {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -24,7 +29,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{ Lang::get('panel-headers.recent-transactions') }}
+                {{ Lang::get('panel-headers.transactions') }}
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -77,11 +82,18 @@
 @stop
 
 @section('page_level_js')
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
 <script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 <script>
     $(document).ready(function () {
         $('#transaction_history').dataTable();
+    });
+</script>
+<script>
+    $(function () {
+        $("#start_date").datepicker();
+        $("#end_date").datepicker();
     });
 </script>
 @stop

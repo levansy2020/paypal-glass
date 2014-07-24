@@ -27,4 +27,6 @@ return array(
 
     "error" => "Error",
 
+    "transactions" => "Transactions",
+
 );
