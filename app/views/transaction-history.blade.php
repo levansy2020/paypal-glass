@@ -32,6 +32,8 @@
                 {{ Lang::get('panel-headers.transactions') }}&nbsp;
                 @if (isset($data['start_date']) && $data['start_date'] != '')
                     ({{ $data['start_date']}} - {{ $data['end_date'] }})
+                @else
+                    (Last 24 Hours)
                 @endif
             </div>
             <!-- /.panel-heading -->
