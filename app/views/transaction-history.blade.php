@@ -9,6 +9,18 @@
 
 @section('content')
 <div class="row">
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Header
+            </div>
+            <div class="panel-body">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -31,7 +43,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data['recent_history'] as $transaction)
+                        @foreach ($data['transaction_history'] as $transaction)
                         <tr class="odd gradeX">
                             <td class="center">{{ date('m-d-Y',strtotime($transaction['L_TIMESTAMP'])) }}</td>
                             <td class="center"><a href="/transaction/{{ $transaction['L_TRANSACTIONID'] }}">{{

@@ -135,7 +135,7 @@ class PageController extends \BaseController {
             }
 
             // Make View
-            $data = array('recent_history' => $recent_history);
+            $data = array('transaction_history' => $recent_history);
             return View::make('transaction-history')->with('data', $data);
         }
         else
