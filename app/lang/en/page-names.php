@@ -13,7 +13,7 @@ return array(
 
 	"transaction-details" => "Transaction Details",
 
-    "overview" => "Overview",
+    "dashboard" => "Dashboard",
 
     "error" => "Error",
 

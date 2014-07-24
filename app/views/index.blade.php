@@ -4,8 +4,8 @@
 <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 @stop
 
-@section('page_title') {{ Lang::get('page-names.overview') }} @stop
-@section('page_name') {{ Lang::get('page-names.overview') }} @stop
+@section('page_title') {{ Lang::get('page-names.dashboard') }} @stop
+@section('page_name') {{ Lang::get('page-names.dashboard') }} @stop
 
 @section('content')
 <div class="row">
