@@ -18,4 +18,6 @@ return array(
     "error" => "Error",
 
     "refund" => "Refund Transaction",
+
+    "transaction-history" => "Transaction History",
 );

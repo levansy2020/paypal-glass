@@ -56,7 +56,7 @@ class PageController extends \BaseController {
 	}
 
     /**
-     * GetTransactionDetails API
+     * Transaction Details Page
      *
      * @param $transaction_id
      * @return mixed
@@ -112,6 +112,34 @@ class PageController extends \BaseController {
             }
 
             return Redirect::to('/');
+
+        }
+    }
+
+    /**
+     * Transaction History Page
+     */
+    public function transactionHistory()
+    {
+        if(Request::isMethod('get'))
+        {
+            try
+            {
+                // TransactionSearch
+                $recent_history = $this->PayPal->getRecentHistory();
+                $this->errorCheck();
+            }
+            catch(Exception $e)
+            {
+                return Redirect::to('error');
+            }
+
+            // Make View
+            $data = array('recent_history' => $recent_history);
+            return View::make('transaction-history')->with('data', $data);
+        }
+        else
+        {
 
         }
     }

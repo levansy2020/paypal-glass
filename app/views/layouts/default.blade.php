@@ -74,7 +74,7 @@
                 <a href="/"><i class="fa fa-dashboard fa-fw"></i> {{ Lang::get('menus.dashboard') }}</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{ Lang::get('menus.history') }}</a>
+                <a href="/transaction/history"><i class="fa fa-history fa-fw"></i> {{ Lang::get('menus.history') }}</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-credit-card fa-fw"></i> {{ Lang::get('menus.vt') }}</a>

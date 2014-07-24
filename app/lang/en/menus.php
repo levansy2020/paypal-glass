@@ -13,7 +13,7 @@ return array(
 
 	"dashboard" => "Dashboard",
 
-    "history" => "History",
+    "history" => "Transaction History",
 
     "vt" => "Virtual Terminal",
 
