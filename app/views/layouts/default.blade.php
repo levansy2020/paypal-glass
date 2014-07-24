@@ -71,10 +71,22 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="/"><i class="fa fa-dashboard fa-fw"></i> {{ Lang::get('menus.overview') }}</a>
+                <a href="/"><i class="fa fa-dashboard fa-fw"></i> {{ Lang::get('menus.dashboard') }}</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{ Lang::get('menus.history') }}</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-credit-card fa-fw"></i> {{ Lang::get('menus.vt') }}</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-refresh fa-fw"></i> {{ Lang::get('menus.create-subscription') }}</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-money fa-fw"></i> {{ Lang::get('menus.send-money') }}</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-cogs fa-fw"></i> {{ Lang::get('menus.settings') }}</a>
             </li>
         </ul>
         <!-- /#side-menu -->

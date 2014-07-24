@@ -11,8 +11,15 @@ return array(
 	|
 	*/
 
-	"overview" => "Overview",
+	"dashboard" => "Dashboard",
 
     "history" => "History",
 
+    "vt" => "Virtual Terminal",
+
+    "settings" => "Settings",
+
+    "send-money" => "Send Money",
+
+    "create-subscription" => "Create Subscription Profile",
 );
