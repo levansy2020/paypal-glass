@@ -29,4 +29,6 @@ return array(
 
     "transactions" => "Transactions",
 
+    "date-range" => "Date Range",
+
 );
