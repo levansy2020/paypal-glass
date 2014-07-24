@@ -30,7 +30,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 {{ Lang::get('panel-headers.transactions') }}&nbsp;
-                @if ($data['start_date'] != '')
+                @if (isset($data['start_date']) && $data['start_date'] != '')
                     ({{ $data['start_date']}} - {{ $data['end_date'] }})
                 @endif
             </div>
