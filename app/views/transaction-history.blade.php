@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('page_level_css')
-
+<link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 @stop
 
 @section('page_title') {{ Lang::get('page-names.transaction-history') }} @stop
@@ -17,7 +17,7 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" id="transaction_history">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -64,6 +64,12 @@
 @endif
 @stop
 
-section('page_level_js')
-
+@section('page_level_js')
+<script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#transaction_history').dataTable();
+    });
+</script>
 @stop
