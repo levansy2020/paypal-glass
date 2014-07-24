@@ -222,32 +222,10 @@
         </div>
     </div>
     @endif
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{ Lang::get('panel-headers.actions') }}</div>
-            <div class="panel-body">
-                @if (isset($transaction_details['PAYMENTSTATUS'])
-                && (strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED'
-                || strtoupper($transaction_details['PAYMENTSTATUS']) == 'PARTIALLYREFUNDED')
-                && strtoupper($transaction_details['TRANSACTIONTYPE']) != 'SENDMONEY')
-                    <a href="/transaction/{{ $transaction_details['TRANSACTIONID'] }}/refund?amount={{ $transaction_details['AMT'] }} ">
-                    <button type="button" class="btn btn-default">{{ Lang::get('buttons.refund') }}</button>
-                    </a>
-                @endif
-
-                @if (isset($transaction_details['PAYMENTSTATUS'])
-                && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING'
-                && strtoupper($transaction_details['PENDINGREASON']) == 'AUTHORIZATION')
-                    <button type="button" class="btn btn-default">{{ Lang::get('buttons.capture') }}</button>
-                    <button type="button" class="btn btn-default">{{ Lang::get('buttons.void') }}</button>
-                @endif
-            </div>
-        </div>
-    </div>
 </div>
 <div class="row">
     @if (isset($transaction_details['ORDERITEMS']) && count($transaction_details['ORDERITEMS']) > 0)
-    <div class="col-md-10">
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">{{ Lang::get('panel-headers.shopping-cart-contents') }}</div>
             <!-- /.panel-heading -->
@@ -284,6 +262,30 @@
         </div>
     </div>
     @endif
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ Lang::get('panel-headers.actions') }}</div>
+            <div class="panel-body">
+                @if (isset($transaction_details['PAYMENTSTATUS'])
+                && (strtoupper($transaction_details['PAYMENTSTATUS']) == 'COMPLETED'
+                || strtoupper($transaction_details['PAYMENTSTATUS']) == 'PARTIALLYREFUNDED')
+                && strtoupper($transaction_details['TRANSACTIONTYPE']) != 'SENDMONEY')
+                <a href="/transaction/{{ $transaction_details['TRANSACTIONID'] }}/refund?amount={{ $transaction_details['AMT'] }} ">
+                    <button type="button" class="btn btn-default">{{ Lang::get('buttons.refund') }}</button>
+                </a>
+                @endif
+
+                @if (isset($transaction_details['PAYMENTSTATUS'])
+                && strtoupper($transaction_details['PAYMENTSTATUS']) == 'PENDING'
+                && strtoupper($transaction_details['PENDINGREASON']) == 'AUTHORIZATION')
+                <button type="button" class="btn btn-default">{{ Lang::get('buttons.capture') }}</button>
+                <button type="button" class="btn btn-default">{{ Lang::get('buttons.void') }}</button>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>
 @if (Config::get('paypal.raw-api-dump'))
 <div class="row">
