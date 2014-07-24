@@ -10,10 +10,10 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Filters
+                {{ Lang::get('panel-headers.date-range') }}
             </div>
             <div class="panel-body">
                 {{ Form::open() }}
@@ -29,7 +29,10 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{ Lang::get('panel-headers.transactions') }}
+                {{ Lang::get('panel-headers.transactions') }}&nbsp;
+                @if ($data['start_date'] != '')
+                    ({{ $data['start_date']}} - {{ $data['end_date'] }})
+                @endif
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
