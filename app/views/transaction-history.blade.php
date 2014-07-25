@@ -9,6 +9,18 @@
 @section('page_name') {{ Lang::get('page-names.transaction-history') }} @stop
 
 @section('content')
+
+@if (isset($data['warnings']) && count($data['warnings']) > 0)
+<div class="row">
+    <div class="col-lg-12">
+        @foreach ($data['warnings'] as $warning)
+            <div class="alert alert-warning">
+                <i class="fa fa-warning"></i>&nbsp;{{ $warning['L_ERRORCODE'] }} - {{ $warning['L_LONGMESSAGE'] }}
+            </div>
+        @endforeach
+    </div>
+</div>
+@endif
 <div class="row">
     <div class="col-lg-4">
         <div class="panel panel-default">
@@ -31,9 +43,9 @@
             <div class="panel-heading">
                 {{ Lang::get('panel-headers.transactions') }}&nbsp;
                 @if (isset($data['start_date']) && $data['start_date'] != '')
-                    ({{ $data['start_date']}} - {{ $data['end_date'] }})
+                ({{ $data['start_date']}} - {{ $data['end_date'] }})
                 @else
-                    (Last 24 Hours)
+                (Last 24 Hours)
                 @endif
             </div>
             <!-- /.panel-heading -->

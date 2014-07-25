@@ -102,8 +102,8 @@ class PageController extends \BaseController {
         }
         else
         {
-            // Date range POSTed.
 
+            // Date range POSTed.
             $start_date_display = Request::has('start_date') ? Request::get('start_date') : '';
             $end_date_display = Request::has('end_date') ? Request::get('end_date') : '';
 
@@ -113,9 +113,16 @@ class PageController extends \BaseController {
             $params = array('start_date' => $start_date, 'end_date' => $end_date);
             $paypal_result = $this->PayPal->transactionSearch($params);
 
+            $warnings = isset($paypal_result['ERRORS']) ? $paypal_result['ERRORS'] : array();
             $transaction_history = $paypal_result['SEARCHRESULTS'];
 
-            $data = array('start_date' => $start_date_display, 'end_date' => $end_date_display, 'transaction_history' => $transaction_history);
+            $data = array(
+                'start_date' => $start_date_display,
+                'end_date' => $end_date_display,
+                'transaction_history' => $transaction_history,
+                'warnings' => $warnings,
+            );
+
             return View::make('transaction-history')->with('data', $data);
 
         }
