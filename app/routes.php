@@ -13,8 +13,12 @@
 
 Route::get('/', 'PageController@index');
 Route::get('/transaction/history', 'PageController@transactionHistory');
-Route::post('/transaction/history', 'PageController@transactionHistory');
 Route::get('/transaction/{transaction_id}', 'PageController@getTransactionDetails');
 Route::get('/transaction/{transaction_id}/refund', 'PageController@refundTransaction');
-Route::post('/transaction/{transaction_id}/refund', 'PageController@refundTransaction');
 Route::get('/error', 'PageController@error');
+
+Route::group(array('before' => 'csrf'), function()
+{
+    Route::post('/transaction/history', 'PageController@transactionHistory');
+    Route::post('/transaction/{transaction_id}/refund', 'PageController@refundTransaction');
+});
