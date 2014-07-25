@@ -75,11 +75,9 @@ class PayPal {
         }
         else
         {
-            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
-
-            return false;
+            throw new PayPalException;
         }
     }
 
@@ -114,11 +112,9 @@ class PayPal {
         }
         else
         {
-            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
-
-            return false;
+            throw new PayPalException;
         }
     }
 
@@ -187,11 +183,9 @@ class PayPal {
         }
         else
         {
-            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
-
-            return false;
+            throw new PayPalException;
         }
     }
 
@@ -270,11 +264,9 @@ class PayPal {
         }
         else
         {
-            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
-
-            return false;
+            throw new PayPalException;
         }
     }
 
@@ -357,11 +349,11 @@ class PayPal {
         }
         else
         {
-            // Store errors in flash and return false.
             $errors = isset($PayPalResult['ERRORS']) ? $PayPalResult['ERRORS'] : array();
             Session::flash('errors', $errors);
-
-            return false;
+            throw new PayPalException;
         }
     }
 }
+
+class PayPalException extends Exception {}

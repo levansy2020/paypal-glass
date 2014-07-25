@@ -35,6 +35,20 @@ Log::useDailyFiles(storage_path().'/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
+| PayPal API Error Handler
+|--------------------------------------------------------------------------
+|
+| Handle PayPal API errors.
+|
+*/
+
+App::error(function(PayPalException $exception, $code)
+{
+    return Redirect::to('error');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Application Error Handler
 |--------------------------------------------------------------------------
 |

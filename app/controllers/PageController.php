@@ -21,33 +21,17 @@ class PageController extends \BaseController {
         return View::make('error');
     }
 
-    public function errorCheck()
-    {
-        if(Session::has('errors') && Session::get('errors.0.L_ERRORCODE'))
-        {
-            throw new Exception('paypal');
-        }
-    }
-
     /**
 	 * Home Page
 	 */
 	public function index()
 	{
-        try
-        {
-            // GetBalance
-            $current_balance = $this->PayPal->getCurrentDefaultBalance();
-            $this->errorCheck();
 
-            // TransactionSearch
-            $recent_history = $this->PayPal->getRecentHistory();
-            $this->errorCheck();
-        }
-        catch(Exception $e)
-        {
-            return Redirect::to('error');
-        }
+        // GetBalance
+        $current_balance = $this->PayPal->getCurrentDefaultBalance();
+
+        // TransactionSearch
+        $recent_history = $this->PayPal->getRecentHistory();
 
         // Make View
         $data = array('current_balance' => $current_balance, 'recent_history' => $recent_history);
@@ -64,16 +48,8 @@ class PageController extends \BaseController {
     public function getTransactionDetails($transaction_id)
     {
 
-        try
-        {
-            // GetTransactionDetails
-            $transaction_details = $this->PayPal->getTransactionDetails($transaction_id);
-            $this->errorCheck();
-        }
-        catch(Exception $e)
-        {
-            return Redirect::to('error');
-        }
+        // GetTransactionDetails
+        $transaction_details = $this->PayPal->getTransactionDetails($transaction_id);
 
         return View::make('get-transaction-details')->with('transaction_details', $transaction_details);
 
@@ -90,26 +66,19 @@ class PageController extends \BaseController {
         }
         else
         {
-            try
-            {
-                // Process Refund
-                $refund_type = Input::get('refund_amount') < Input::get('original_amount') ? 'Partial' : 'Full';
-                $params = array(
-                    'transaction_id' => $transaction_id,
-                    'original_amount' => Input::get('original_amount'),
-                    'amount' => Input::get('refund_amount'),
-                    'invoice_number' => Input::get('invoice_number'),
-                    'notes' => Input::get('notes'),
-                    'invoice_id' => Input::get('invoice_number'),
-                    'refund_type' => $refund_type,
-                );
-                $refund = $this->PayPal->refundTransaction($params);
-                $this->errorCheck();
-            }
-            catch(Exception $e)
-            {
-                return Redirect::to('error');
-            }
+
+            // Process Refund
+            $refund_type = Input::get('refund_amount') < Input::get('original_amount') ? 'Partial' : 'Full';
+            $params = array(
+                'transaction_id' => $transaction_id,
+                'original_amount' => Input::get('original_amount'),
+                'amount' => Input::get('refund_amount'),
+                'invoice_number' => Input::get('invoice_number'),
+                'notes' => Input::get('notes'),
+                'invoice_id' => Input::get('invoice_number'),
+                'refund_type' => $refund_type,
+            );
+            $refund = $this->PayPal->refundTransaction($params);
 
             return Redirect::to('/');
 
@@ -123,16 +92,9 @@ class PageController extends \BaseController {
     {
         if(Request::isMethod('get'))
         {
-            try
-            {
-                // TransactionSearch
-                $recent_history = $this->PayPal->getRecentHistory();
-                $this->errorCheck();
-            }
-            catch(Exception $e)
-            {
-                return Redirect::to('error');
-            }
+
+            // TransactionSearch
+            $recent_history = $this->PayPal->getRecentHistory();
 
             // Make View
             $data = array('transaction_history' => $recent_history);
@@ -141,27 +103,20 @@ class PageController extends \BaseController {
         else
         {
             // Date range POSTed.
-            try
-            {
-                $start_date_display = Request::has('start_date') ? Request::get('start_date') : '';
-                $end_date_display = Request::has('end_date') ? Request::get('end_date') : '';
 
-                $start_date = $start_date_display != '' ? gmdate('Y-m-d 00:00:00', strtotime(Request::get('start_date'))) : '';
-                $end_date = $end_date_display != '' ? gmdate('Y-m-d 23:59:59', strtotime(Request::get('end_date'))) : '';
+            $start_date_display = Request::has('start_date') ? Request::get('start_date') : '';
+            $end_date_display = Request::has('end_date') ? Request::get('end_date') : '';
 
-                $params = array('start_date' => $start_date, 'end_date' => $end_date);
-                $paypal_result = $this->PayPal->transactionSearch($params);
+            $start_date = $start_date_display != '' ? gmdate('Y-m-d 00:00:00', strtotime(Request::get('start_date'))) : '';
+            $end_date = $end_date_display != '' ? gmdate('Y-m-d 23:59:59', strtotime(Request::get('end_date'))) : '';
 
-                $transaction_history = $paypal_result['SEARCHRESULTS'];
-                $this->errorCheck();
+            $params = array('start_date' => $start_date, 'end_date' => $end_date);
+            $paypal_result = $this->PayPal->transactionSearch($params);
 
-                $data = array('start_date' => $start_date_display, 'end_date' => $end_date_display, 'transaction_history' => $transaction_history);
-                return View::make('transaction-history')->with('data', $data);
-            }
-            catch(Exception $e)
-            {
-                return Redirect::to('error');
-            }
+            $transaction_history = $paypal_result['SEARCHRESULTS'];
+
+            $data = array('start_date' => $start_date_display, 'end_date' => $end_date_display, 'transaction_history' => $transaction_history);
+            return View::make('transaction-history')->with('data', $data);
 
         }
     }
