@@ -91,7 +91,7 @@
 <div class="row">
     <div class="col-lg-12">
         <pre>
-            {{ print_r($data['recent_history']) }}
+            {{ print_r($data) }}
         </pre>
     </div>
 </div>
